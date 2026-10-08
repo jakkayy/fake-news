@@ -1,0 +1,21 @@
+{
+  "model": "LogisticRegression",
+  "class_weight": "balanced",
+  "selected_on": "val macro-F1",
+  "train_rows": 10794,
+  "val_rows": 2313,
+  "modes": {
+    "text": {
+      "C": 3.0,
+      "val_macro_f1": 0.8416
+    },
+    "image": {
+      "C": 10.0,
+      "val_macro_f1": 0.8014
+    },
+    "text+image": {
+      "C": 1.0,
+      "val_macro_f1": 0.8674
+    }
+  }
+}

@@ -58,4 +58,4 @@ with gr.Blocks(title="Fakeddit fake news demo") as demo:
     button.click(run, inputs=[title, image, choice], outputs=[*labels, note])
 
 if __name__ == "__main__":
-    demo.launch(server_name="127.0.0.1")
+    demo.launch(server_name="127.0.0.1", share="--share" in sys.argv)

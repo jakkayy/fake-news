@@ -1,0 +1,9 @@
+case,id,clean_title,image,label,label_name,subreddit,prob_real_text,prob_real_image,prob_real_text+image
+ทายถูก: ข่าวปลอมชัดเจน,d3slqz5,one cannot be driven mad if one is mad already,d3slqz5.jpg,0,ปลอม (0),psbattle_artwork,0.0587,0.0001,0.0018
+ทายถูก: ข่าวจริงชัดเจน,br1i12,measles outbreak spreads to oklahoma as us reports new cases,br1i12.jpg,1,จริง (1),usnews,0.9906,0.9781,0.9975
+ข้อความถูก รูปผิด รวมแล้วถูก,3kkmh6,fight over cold chicken at bbq benefit ends in shooting,3kkmh6.jpg,1,จริง (1),nottheonion,0.9941,0.4747,0.9659
+รูปถูก ข้อความผิด รวมแล้วถูก,9fwnfa,centre street when i dont have red i use blue,9fwnfa.jpg,0,ปลอม (0),fakealbumcovers,0.6342,0.0057,0.1017
+ทายผิด: รูปจริงแต่มาจาก subreddit ปลอม,8trfsc,this crack in the sidewalk,8trfsc.jpg,0,ปลอม (0),misleadingthumbnails,0.9732,0.941,0.9874
+ทายผิด: ภาพต้นฉบับที่ดูเหมือนตัดต่อ,11s91b,palpatines creepy smile,11s91b.jpg,1,จริง (1),photoshopbattles,0.0189,0.0424,0.0229
+ทายผิด: ข่าวเสียดสี,6x6vos,authorities urge louisiana residents to evacuate dangerous lower income brackets,6x6vos.jpg,0,ปลอม (0),theonion,0.9495,0.9582,0.9652
+ไม่แน่ใจ: ความน่าจะเป็นใกล้ 0.5,882huj,sad vegan cheese,882huj.jpg,0,ปลอม (0),pareidolia,0.2477,0.5613,0.5004

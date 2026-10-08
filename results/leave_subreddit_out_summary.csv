@@ -1,0 +1,7 @@
+mode,label,subreddits,mean_in_dist_acc,mean_held_out_acc
+text,0,11,0.732,0.586
+text,1,8,0.849,0.66
+image,0,11,0.618,0.469
+image,1,8,0.825,0.684
+text+image,0,11,0.718,0.545
+text+image,1,8,0.878,0.69

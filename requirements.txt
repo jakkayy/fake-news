@@ -1,0 +1,12 @@
+# เวอร์ชันตรงกันทั้งทีม (บน Colab ที่มี torch อยู่แล้ว ไม่ต้องลง torch ใหม่ถ้าเวอร์ชันหลักตรงกัน)
+torch==2.14.1
+transformers==5.18.0
+numpy==2.5.3
+pandas==3.0.6
+scikit-learn==1.9.1
+pillow==12.3.0
+requests==2.34.2
+tqdm==4.70.1
+matplotlib==3.11.2
+joblib==1.6.0
+gradio==6.29.1

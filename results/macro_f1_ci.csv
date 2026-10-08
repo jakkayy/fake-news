@@ -1,0 +1,5 @@
+model,macro_f1,ci95_low,ci95_high
+clip_text,0.8471,0.8326,0.8616
+clip_image,0.798,0.7818,0.8152
+clip_text+image,0.8731,0.8588,0.886
+tfidf,0.7604,0.7432,0.7778

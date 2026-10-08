@@ -1,0 +1,15 @@
+# ข้อมูลทั้งหมดไม่ขึ้น git (ต้นฉบับโหลดจาก Kaggle, รูป/embeddings อยู่ใน Drive)
+# ยกเว้นไฟล์รายการ split ที่ทุกคนต้องใช้ร่วมกัน
+data/*
+!data/splits/
+
+# โมเดลที่เทรนแล้ว
+models/
+
+# Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+.env

@@ -1,0 +1,8 @@
+group,n,fusion_acc
+text and image both correct,1650,0.998
+only text correct,322,0.811
+only image correct,210,0.557
+both wrong,131,0.038
+text and image disagree,532,0.711
+fusion fixes text error,122,
+fusion breaks text-correct,64,

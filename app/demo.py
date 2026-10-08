@@ -1,3 +1,4 @@
+import json
 import sys
 from pathlib import Path
 
@@ -26,6 +27,7 @@ class DecisionLabel(gr.Label):
 
 
 predictor = Predictor()
+SIMILARITY_THRESHOLD = json.loads((ROOT / "results" / "similarity_warning.json").read_text())["threshold"]
 classifier_choices = [CLASSIFIER_NAMES[k] for k in predictor.classifiers]
 
 
@@ -33,7 +35,8 @@ def run(title, image, choice, classifier_name):
     if not (title and title.strip()) and image is None:
         raise gr.Error("ใส่หัวข้อโพสต์ หรือรูป อย่างน้อยหนึ่งอย่าง")
     classifier = next(k for k, n in CLASSIFIER_NAMES.items() if n == classifier_name)
-    probs = predictor.predict(title, image, classifier)
+    scored = predictor.score(title, image, classifier)
+    probs, similarity = scored["probs"], scored["similarity"]
     wanted = list(MODE_NAMES) if choice == CHOICES[0] else [m for m, n in MODE_NAMES.items() if n == choice]
     outputs = []
     for mode, name in MODE_NAMES.items():
@@ -45,8 +48,13 @@ def run(title, image, choice, classifier_name):
         else:
             outputs.append(DecisionLabel(value=None, label=f"โหมด{name}", visible=mode in wanted))
     needs = {"text": "หัวข้อ", "image": "รูป", "text+image": "ทั้งหัวข้อและรูป"}
-    note = "\n".join(f"โหมด{MODE_NAMES[m]}ต้องใส่{needs[m]}" for m in wanted if m not in probs)
-    return (*outputs, note)
+    lines = [f"โหมด{MODE_NAMES[m]}ต้องใส่{needs[m]}" for m in wanted if m not in probs]
+    if similarity is not None and similarity < SIMILARITY_THRESHOLD:
+        lines.append(f"⚠️ **รูปกับหัวข้อดูไม่เกี่ยวกัน** (ความสอดคล้อง {similarity:.2f} ต่ำกว่าเกณฑ์ {SIMILARITY_THRESHOLD:.2f} "
+                     "ซึ่งเป็น 5% ล่างสุดของชุดเทรน) อาจเป็นการใช้รูปผิดบริบท โมเดลไม่ได้ใช้ค่านี้ในการทำนาย")
+    elif similarity is not None:
+        lines.append(f"ความสอดคล้องของรูปกับหัวข้อ {similarity:.2f} (เกณฑ์เตือน < {SIMILARITY_THRESHOLD:.2f})")
+    return (*outputs, "\n\n".join(lines))
 
 
 examples = pd.read_csv(EXAMPLES_DIR / "examples.csv")

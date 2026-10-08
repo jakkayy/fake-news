@@ -41,14 +41,18 @@ class Predictor:
         return (x / x.norm(dim=-1, keepdim=True)).cpu().numpy().astype(np.float32)
 
     def predict(self, title=None, image=None, classifier="logreg"):
+        return self.score(title, image, classifier)["probs"]
+
+    def score(self, title=None, image=None, classifier="logreg"):
         if isinstance(image, (str, Path)):
             image = Image.open(image)
         text = self._embed_text(title) if title and title.strip() else None
         img = self._embed_image(image) if image is not None else None
+        similarity = float((text @ img.T)[0, 0]) if text is not None and img is not None else None
         probs = {}
         for mode in MODES:
             if (mode != "image" and text is None) or (mode != "text" and img is None):
                 continue
             X = build_features(mode, text, img)
             probs[mode] = float(self.classifiers[classifier][mode].predict_proba(X)[0, 1])
-        return probs
+        return {"probs": probs, "similarity": similarity}

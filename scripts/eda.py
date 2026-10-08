@@ -65,6 +65,8 @@ steps = [("rows in multimodal_train.tsv", stats["raw_rows"]),
          (f"stratified sample (seed {stats['seed']})", stats["sampled"]),
          ("image downloaded and readable", stats["final_rows"])]
 fails = stats["download_failed"]
+raw = pd.read_csv(ROOT / "data" / "raw" / "multimodal_train.tsv", sep="\t", low_memory=False)
+missing = (raw.isna().mean() * 100).round(2).sort_values(ascending=False)
 length = sample.groupby(LABEL_COL)["title_words"].describe()[["mean", "50%", "max"]].round(1)
 lines = [
     "# Exploration summary", "",
@@ -73,6 +75,12 @@ lines = [
     *[f"| {name} | {n:,} |" for name, n in steps], "",
     f"รูปที่โหลดไม่ได้ {stats['sampled'] - stats['final_rows']:,} รูป ({1 - stats['final_rows'] / stats['sampled']:.1%}): "
     + ", ".join(f"{k} {v}" for k, v in fails.items()), "",
+    "## ค่าว่างในไฟล์ต้นฉบับ (multimodal_train.tsv)", "",
+    f"จาก {len(raw):,} แถว {len(raw.columns)} คอลัมน์ คอลัมน์ที่ไม่ได้ระบุว่างไม่มีค่าว่าง", "",
+    "| คอลัมน์ | ว่าง (%) | ใช้ในโมเดล |", "|---|---|---|",
+    *[f"| {c} | {v} | {'ใช่' if c in ('clean_title', 'image_url') else 'ไม่ (ตัดทิ้ง)'} |" for c, v in missing[missing > 0].items()], "",
+    "เมทาดาต้าที่ว่างเยอะ (linked_submission_id, domain, upvote_ratio, num_comments) ไม่กระทบโมเดล เพราะใช้แค่หัวข้อกับรูป "
+    "ส่วน image_url ที่ว่างตัดทิ้งตอนเตรียมข้อมูล", "",
     "## สัดส่วนคลาสในแต่ละ split", "", "| split | แถว | ข่าวจริง (1) |", "|---|---|---|",
     *[f"| {s} | {v['rows']:,} | {v['real_ratio']:.1%} |" for s, v in stats["splits"].items()], "",
     "## ความยาวหัวข้อ (คำ)", "", "| คลาส | เฉลี่ย | มัธยฐาน | สูงสุด |", "|---|---|---|---|",

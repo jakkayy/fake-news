@@ -1,0 +1,5 @@
+comparison,macro_f1_diff,diff_ci95_low,diff_ci95_high,only_a_correct,only_b_correct,mcnemar_exact_p
+clip_text+image vs clip_text,0.026,0.0146,0.0379,122,64,2.54e-05
+clip_text+image vs clip_image,0.0752,0.0581,0.0909,266,96,1.36e-19
+clip_text vs clip_image,0.0492,0.029,0.0683,322,210,1.37e-06
+clip_text vs tfidf,0.0867,0.0687,0.1034,318,118,2.79e-22

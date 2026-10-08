@@ -15,6 +15,21 @@
 
 รูปที่โหลดไม่ได้ 1,080 รูป (6.5%): http_404 711, placeholder 319, bad_image:UnidentifiedImageError 13, ConnectionError 13, ConnectTimeout 8, http_403 6, http_410 3, http_503 3, http_400 2, TooManyRedirects 1, http_530 1
 
+## ค่าว่างในไฟล์ต้นฉบับ (multimodal_train.tsv)
+
+จาก 564,000 แถว 16 คอลัมน์ คอลัมน์ที่ไม่ได้ระบุว่างไม่มีค่าว่าง
+
+| คอลัมน์ | ว่าง (%) | ใช้ในโมเดล |
+|---|---|---|
+| linked_submission_id | 70.24 | ไม่ (ตัดทิ้ง) |
+| domain | 29.76 | ไม่ (ตัดทิ้ง) |
+| upvote_ratio | 29.76 | ไม่ (ตัดทิ้ง) |
+| num_comments | 29.76 | ไม่ (ตัดทิ้ง) |
+| author | 5.09 | ไม่ (ตัดทิ้ง) |
+| image_url | 0.27 | ใช่ |
+
+เมทาดาต้าที่ว่างเยอะ (linked_submission_id, domain, upvote_ratio, num_comments) ไม่กระทบโมเดล เพราะใช้แค่หัวข้อกับรูป ส่วน image_url ที่ว่างตัดทิ้งตอนเตรียมข้อมูล
+
 ## สัดส่วนคลาสในแต่ละ split
 
 | split | แถว | ข่าวจริง (1) |

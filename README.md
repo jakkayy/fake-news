@@ -37,7 +37,7 @@ data/
 
 ## เดโม
 
-ต้องมีโมเดลใน `models/` ก่อน (`.venv/bin/python scripts/train_models.py` ใช้ไม่ถึง 1 นาที เมื่อมี `data/embeddings/` แล้ว)
+ต้องมีโมเดลใน `models/` ก่อน (`.venv/bin/python scripts/train_models.py` ใช้ไม่ถึง 1 นาที เมื่อมี `data/embeddings/` แล้ว) ถ้าอยากสลับไปใช้ MLP ในเดโม ให้รัน `.venv/bin/python scripts/train_mlp.py` เพิ่ม (ประมาณ 5 นาที) ถ้าไม่มีโมเดล MLP เดโมจะมีแค่ Logistic Regression
 
 ```bash
 .venv/bin/python app/demo.py

@@ -1,0 +1,31 @@
+{
+  "model": "MLPClassifier (relu, adam, early stopping on 10% of train)",
+  "selected_on": "val macro-F1, decision threshold also tuned on val",
+  "modes": {
+    "text": {
+      "hidden": [
+        256,
+        128
+      ],
+      "alpha": 0.001,
+      "threshold": 0.5,
+      "val_macro_f1": 0.8539
+    },
+    "image": {
+      "hidden": [
+        256
+      ],
+      "alpha": 0.001,
+      "threshold": 0.4,
+      "val_macro_f1": 0.8111
+    },
+    "text+image": {
+      "hidden": [
+        256
+      ],
+      "alpha": 0.0001,
+      "threshold": 0.3,
+      "val_macro_f1": 0.8755
+    }
+  }
+}

@@ -1,0 +1,4 @@
+mode,logreg_macro_f1,logreg_ci95,mlp_macro_f1,mlp_ci95,mlp_accuracy,diff_mlp_minus_logreg,diff_ci95_low,diff_ci95_high,only_mlp_correct,only_logreg_correct,mcnemar_exact_p
+text,0.8471,0.833-0.862,0.851,0.836-0.866,0.8578,0.0039,-0.0064,0.0143,79,67,0.363
+image,0.798,0.782-0.815,0.8174,0.801-0.834,0.8227,0.0194,0.0096,0.0289,87,44,0.0002
+text+image,0.8731,0.859-0.886,0.8852,0.872-0.897,0.8893,0.012,0.0019,0.0223,86,59,0.0305

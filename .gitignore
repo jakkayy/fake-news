@@ -13,3 +13,6 @@ __pycache__/
 .venv/
 venv/
 .env
+
+# ไฟล์ stub ที่ Gradio สร้างเองตอนรันเดโม
+app/*.pyi

@@ -74,3 +74,13 @@ results.to_csv(RESULTS_DIR / "similarity_feature.csv", index=False)
 (RESULTS_DIR / "similarity_feature_test.json").write_text(json.dumps(comparison, indent=2) + "\n")
 print(results.to_string(index=False))
 print(json.dumps(comparison, indent=2))
+
+real_train = sim["train"][y["train"] == 1, 0]
+warning = {
+    "rule": "warn when cos(title, image) is below the 5th percentile of the training split",
+    "threshold": round(float(np.percentile(sim["train"][:, 0], 5)), 4),
+    "train_percentiles": {str(q): round(float(np.percentile(sim["train"][:, 0], q)), 4) for q in [1, 5, 25, 50]},
+    "share_of_real_train_posts_below": round(float((real_train < np.percentile(sim["train"][:, 0], 5)).mean()), 4),
+}
+(RESULTS_DIR / "similarity_warning.json").write_text(json.dumps(warning, indent=2) + "\n")
+print(json.dumps(warning, indent=2))

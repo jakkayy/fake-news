@@ -1,0 +1,11 @@
+{
+  "rule": "warn when cos(title, image) is below the 5th percentile of the training split",
+  "threshold": 0.1862,
+  "train_percentiles": {
+    "1": 0.1639,
+    "5": 0.1862,
+    "25": 0.2252,
+    "50": 0.2679
+  },
+  "share_of_real_train_posts_below": 0.0076
+}

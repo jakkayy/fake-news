@@ -1,0 +1,55 @@
+{
+  "clean_title_audit": {
+    "rows": 15420,
+    "empty": 0,
+    "uppercase": 0,
+    "punctuation": 0,
+    "digits": 0,
+    "non_ascii": 0,
+    "extra_whitespace": 0,
+    "url_fragments": 35,
+    "one_word": 968,
+    "over_50_words": 2
+  },
+  "raw_title_issues": {
+    "psbattle_prefix_rows": 1158,
+    "psbattle_prefix_by_subreddit": {
+      "photoshopbattles": 1156,
+      "psbattle_artwork": 2
+    },
+    "raw_titles_with_digits": 2575
+  },
+  "light_clean": {
+    "rule": "remove URL fragments (http..., www...), collapse whitespace",
+    "rows_changed": 35,
+    "examples": [
+      [
+        "httpiimgurcomnzxytjpg",
+        ""
+      ],
+      [
+        "httpiimgurcomlnidcjpg",
+        ""
+      ],
+      [
+        "httpiimgurcomxqhjtqjpg",
+        ""
+      ]
+    ]
+  },
+  "text_only_macro_f1_by_title_version": {
+    "raw_title": {
+      "val": 0.8784,
+      "test": 0.8859
+    },
+    "clean_title": {
+      "val": 0.8416,
+      "test": 0.8471
+    },
+    "clean_title_light_clean": {
+      "val": 0.8412,
+      "test": 0.8476
+    }
+  },
+  "text_model_C": 3.0
+}

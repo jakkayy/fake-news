@@ -1,0 +1,7 @@
+model,macro_f1,accuracy,params
+dummy_most_frequent,0.3789,0.61,{}
+dummy_stratified,0.4866,0.5097,{}
+tfidf_logreg,0.7604,0.7661,"{""C"": 1, ""val_macro_f1"": 0.7728, ""ngram_range"": [1, 2], ""vocab_size"": 12043}"
+clip_logreg_image,0.798,0.8042,{}
+clip_logreg_text,0.8471,0.8526,{}
+clip_logreg_text+image,0.8731,0.8776,{}

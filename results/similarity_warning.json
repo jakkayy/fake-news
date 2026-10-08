@@ -1,11 +1,15 @@
 {
-  "rule": "warn when cos(title, image) is below the 5th percentile of the training split",
-  "threshold": 0.1862,
+  "rule": "warn when cos(title, image) is below the 15th percentile of the training split",
+  "percentile": 15,
+  "threshold": 0.2084,
   "train_percentiles": {
     "1": 0.1639,
     "5": 0.1862,
+    "10": 0.199,
+    "15": 0.2084,
     "25": 0.2252,
     "50": 0.2679
   },
-  "share_of_real_train_posts_below": 0.0076
+  "share_of_real_train_posts_flagged": 0.0228,
+  "share_of_random_mismatched_pairs_flagged": 0.8328
 }

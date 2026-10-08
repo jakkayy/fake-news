@@ -75,12 +75,17 @@ results.to_csv(RESULTS_DIR / "similarity_feature.csv", index=False)
 print(results.to_string(index=False))
 print(json.dumps(comparison, indent=2))
 
-real_train = sim["train"][y["train"] == 1, 0]
+WARN_PERCENTILE = 15
+train_sim = sim["train"][:, 0]
+threshold = float(np.percentile(train_sim, WARN_PERCENTILE))
+shuffled = (data["train"][0] * data["train"][1][rng.permutation(len(train_sim))]).sum(axis=1)
 warning = {
-    "rule": "warn when cos(title, image) is below the 5th percentile of the training split",
-    "threshold": round(float(np.percentile(sim["train"][:, 0], 5)), 4),
-    "train_percentiles": {str(q): round(float(np.percentile(sim["train"][:, 0], q)), 4) for q in [1, 5, 25, 50]},
-    "share_of_real_train_posts_below": round(float((real_train < np.percentile(sim["train"][:, 0], 5)).mean()), 4),
+    "rule": f"warn when cos(title, image) is below the {WARN_PERCENTILE}th percentile of the training split",
+    "percentile": WARN_PERCENTILE,
+    "threshold": round(threshold, 4),
+    "train_percentiles": {str(q): round(float(np.percentile(train_sim, q)), 4) for q in [1, 5, 10, 15, 25, 50]},
+    "share_of_real_train_posts_flagged": round(float((train_sim[y["train"] == 1] < threshold).mean()), 4),
+    "share_of_random_mismatched_pairs_flagged": round(float((shuffled < threshold).mean()), 4),
 }
 (RESULTS_DIR / "similarity_warning.json").write_text(json.dumps(warning, indent=2) + "\n")
 print(json.dumps(warning, indent=2))

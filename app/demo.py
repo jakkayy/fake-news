@@ -27,7 +27,8 @@ class DecisionLabel(gr.Label):
 
 
 predictor = Predictor()
-SIMILARITY_THRESHOLD = json.loads((ROOT / "results" / "similarity_warning.json").read_text())["threshold"]
+SIMILARITY_WARNING = json.loads((ROOT / "results" / "similarity_warning.json").read_text())
+SIMILARITY_THRESHOLD = SIMILARITY_WARNING["threshold"]
 classifier_choices = [CLASSIFIER_NAMES[k] for k in predictor.classifiers]
 
 
@@ -50,10 +51,10 @@ def run(title, image, choice, classifier_name):
     needs = {"text": "หัวข้อ", "image": "รูป", "text+image": "ทั้งหัวข้อและรูป"}
     lines = [f"โหมด{MODE_NAMES[m]}ต้องใส่{needs[m]}" for m in wanted if m not in probs]
     if similarity is not None and similarity < SIMILARITY_THRESHOLD:
-        lines.append(f"⚠️ **รูปกับหัวข้อดูไม่เกี่ยวกัน** (ความสอดคล้อง {similarity:.2f} ต่ำกว่าเกณฑ์ {SIMILARITY_THRESHOLD:.2f} "
-                     "ซึ่งเป็น 5% ล่างสุดของชุดเทรน) อาจเป็นการใช้รูปผิดบริบท โมเดลไม่ได้ใช้ค่านี้ในการทำนาย")
+        lines.append(f"⚠️ **รูปกับหัวข้อดูไม่เกี่ยวกัน** (ความสอดคล้อง {similarity:.3f} ต่ำกว่าเกณฑ์ {SIMILARITY_THRESHOLD:.3f} "
+                     f"ซึ่งเป็น {SIMILARITY_WARNING['percentile']}% ล่างสุดของชุดเทรน) อาจเป็นการใช้รูปผิดบริบท โมเดลไม่ได้ใช้ค่านี้ในการทำนาย")
     elif similarity is not None:
-        lines.append(f"ความสอดคล้องของรูปกับหัวข้อ {similarity:.2f} (เกณฑ์เตือน < {SIMILARITY_THRESHOLD:.2f})")
+        lines.append(f"ความสอดคล้องของรูปกับหัวข้อ {similarity:.3f} (เกณฑ์เตือน < {SIMILARITY_THRESHOLD:.3f})")
     return (*outputs, "\n\n".join(lines))
 
 

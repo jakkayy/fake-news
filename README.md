@@ -2,20 +2,46 @@
 
 Multimodal fake news detection บนชุดข้อมูล Fakeddit โดยใช้ CLIP embeddings ของหัวข้อโพสต์และรูป แล้วเทียบ classifier 3 โหมด (ข้อความ / รูป / ข้อความ+รูป)
 
-## เตรียมข้อมูล
+## ติดตั้ง
 
-ไฟล์ข้อมูลไม่อยู่ใน git ต้องโหลดเองจาก Kaggle
+```bash
+python3 -m venv .venv
+.venv/bin/pip install torch --index-url https://download.pytorch.org/whl/cpu
+.venv/bin/pip install -r requirements.txt
+```
 
-1. โหลด `multimodal_train.tsv`, `multimodal_validate.tsv`, `multimodal_test_public.tsv` จากหน้า Fakeddit บน Kaggle
-2. วางไว้ที่ `data/raw/` โดยไม่แก้ไขไฟล์
+## ใช้ข้อมูลที่เตรียมไว้แล้ว (แนะนำ)
+
+รูปและ embeddings ถูกโหลดและดึงไว้แล้ว ไม่ต้องรันซ้ำ
+
+1. โหลด `embeddings.zip` (56 MB) จาก Google Drive กลางของทีม แล้วแตกไว้ใน `data/`
+2. ถ้าต้องดูรูป (วิเคราะห์ข้อผิดพลาด, สไลด์, เดโม) โหลด `images.zip` (348 MB) แล้วแตกไว้ใน `data/` เช่นกัน
+3. `git pull` ให้ได้ `data/splits/split.csv` ล่าสุด
+
+```python
+import sys; sys.path.insert(0, "src")
+from fakenews.embed_store import load_embeddings
+
+X_text, X_image, y, ids = load_embeddings("data/embeddings", "data/splits/split.csv", "train")
+```
+
+`split` เป็นได้ `"train"`, `"val"`, `"test"` ห้ามสุ่มแบ่งใหม่เอง
 
 ```
 data/
-├── raw/       # .tsv ต้นฉบับจาก Kaggle (ไม่ขึ้น git)
-└── splits/    # รายการ id ของ train/val/test (ขึ้น git, ห้ามแบ่งใหม่เอง)
+├── raw/          # .tsv ต้นฉบับจาก Kaggle (ไม่ขึ้น git)
+├── images/       # <id>.jpg ย่อด้านสั้นเหลือ 256 px (จาก images.zip)
+├── embeddings/   # text.npy, image.npy, ids.csv, labels.npy เรียงแถวตรงกัน (จาก embeddings.zip)
+└── splits/       # split.csv และ prepare_stats.json (ขึ้น git)
 ```
 
-รูปที่โหลดมา, embeddings และโมเดลที่เทรนแล้ว เก็บใน Google Drive กลางของทีม
+## สร้างข้อมูลใหม่ตั้งแต่ต้น
+
+ทำเฉพาะเมื่อจำเป็น ใช้เวลาประมาณ 50 นาทีบน CPU
+
+1. โหลด `multimodal_train.tsv`, `multimodal_validate.tsv`, `multimodal_test_public.tsv` จากหน้า Fakeddit บน Kaggle มาวางที่ `data/raw/`
+2. `.venv/bin/python scripts/prepare_data.py` สุ่ม 16,500 แถว (seed 42) โหลดรูป และแบ่ง train/val/test 70/15/15
+3. `.venv/bin/python scripts/extract_embeddings.py` ดึง CLIP ViT-B/32 embeddings
 
 ## ป้ายกำกับ
 

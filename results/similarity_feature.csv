@@ -1,0 +1,4 @@
+features,C,val_macro_f1,test_macro_f1,similarity_coef
+similarity,0.01,0.7097,0.7062,1.1225
+text+image,1.0,0.8674,0.8731,
+text+image+similarity,1.0,0.8784,0.8799,0.9193

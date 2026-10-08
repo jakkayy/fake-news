@@ -1,0 +1,22 @@
+{
+  "comparison": "text+image+similarity vs text+image (test)",
+  "macro_f1_diff": 0.0068,
+  "diff_ci95": [
+    -0.0027,
+    0.0161
+  ],
+  "only_with_similarity_correct": 66,
+  "only_without_similarity_correct": 50,
+  "mcnemar_exact_p": 0.163,
+  "similarity_auc_real_vs_fake_train": 0.7818,
+  "similarity_by_label_train": {
+    "0": {
+      "mean": 0.2477,
+      "std": 0.0492
+    },
+    "1": {
+      "mean": 0.2971,
+      "std": 0.041
+    }
+  }
+}

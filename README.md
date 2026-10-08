@@ -35,6 +35,16 @@ data/
 └── splits/       # split.csv และ prepare_stats.json (ขึ้น git)
 ```
 
+## เดโม
+
+ต้องมีโมเดลใน `models/` ก่อน (`.venv/bin/python scripts/train_models.py` ใช้ไม่ถึง 1 นาที เมื่อมี `data/embeddings/` แล้ว)
+
+```bash
+.venv/bin/python app/demo.py
+```
+
+เปิด http://127.0.0.1:7860 ใส่หัวข้อโพสต์ภาษาอังกฤษกับรูป หรือกดตัวอย่าง 8 ตัวจากชุด test ใน `app/examples/` ซึ่งใช้ได้แม้ไม่มีเน็ต (ยกเว้นครั้งแรกที่ต้องโหลด CLIP)
+
 ## สร้างข้อมูลใหม่ตั้งแต่ต้น
 
 ทำเฉพาะเมื่อจำเป็น ใช้เวลาประมาณ 50 นาทีบน CPU

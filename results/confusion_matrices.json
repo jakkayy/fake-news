@@ -1,0 +1,41 @@
+{
+  "rows": "true label",
+  "cols": "predicted label",
+  "labels": [
+    "fake (0)",
+    "real (1)"
+  ],
+  "test_rows": 2313,
+  "matrices": {
+    "text": [
+      [
+        1204,
+        207
+      ],
+      [
+        134,
+        768
+      ]
+    ],
+    "image": [
+      [
+        1132,
+        279
+      ],
+      [
+        174,
+        728
+      ]
+    ],
+    "text+image": [
+      [
+        1233,
+        178
+      ],
+      [
+        105,
+        797
+      ]
+    ]
+  }
+}

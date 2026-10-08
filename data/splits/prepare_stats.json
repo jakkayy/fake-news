@@ -1,0 +1,40 @@
+{
+  "seed": 42,
+  "raw_rows": 564000,
+  "after_drop_null_url": 562466,
+  "conflicting_label_urls_dropped": 879,
+  "after_drop_conflicts": 555305,
+  "after_dedup_url": 546614,
+  "sampled": 16500,
+  "download_seconds": 1035,
+  "download_ok": 15420,
+  "download_failed": {
+    "http_404": 711,
+    "placeholder": 319,
+    "bad_image:UnidentifiedImageError": 13,
+    "ConnectionError": 13,
+    "ConnectTimeout": 8,
+    "http_403": 6,
+    "http_410": 3,
+    "http_503": 3,
+    "http_400": 2,
+    "TooManyRedirects": 1,
+    "http_530": 1
+  },
+  "unreadable_after_download": 0,
+  "final_rows": 15420,
+  "splits": {
+    "train": {
+      "rows": 10794,
+      "real_ratio": 0.3902
+    },
+    "val": {
+      "rows": 2313,
+      "real_ratio": 0.39
+    },
+    "test": {
+      "rows": 2313,
+      "real_ratio": 0.39
+    }
+  }
+}
